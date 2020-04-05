@@ -16,10 +16,9 @@ files = os.listdir(path)
 # change name of every file in path
 for i in files:
     oldFile = path + "\\" + i
-    # print("oldFile: " + oldFile)
+    oldFileExtension = os.path.splitext(oldFile)[1] # get file extension
     newName = randomString(15) 
-    newFile = path + "\\" + newName + ".jpg"
-    # print("newFile: " + newFile)
+    newFile = path + "\\" + newName + oldFileExtension
     os.rename(oldFile, newFile)
 
-print("Names of files changed!")
+print("Filenames changed!")
