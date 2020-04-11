@@ -12,7 +12,7 @@ import tkinter.filedialog
 import tkinter.messagebox
 from cv2 import cv2 # I read this on stackoverflow, honestly
 from os.path import isfile, join
-
+from random import randint
 
 # generate random name function
 def randomString(stringLength):
@@ -32,9 +32,15 @@ def changeFilenames(path):
         for i in files:
             oldFile = path + "\\" + i
             oldFileExtension = os.path.splitext(oldFile)[1] # get file extension
-            newName = randomString(25) 
-            newFile = path + "\\" + newName + oldFileExtension
-            os.rename(oldFile, newFile)
+            while True:
+                newName = randomString(randint(5,25)) 
+                newFile = path + "\\" + newName + oldFileExtension
+                # check if file already exists
+                if os.path.isfile(newFile):
+                    continue
+                else:
+                    os.rename(oldFile, newFile)
+                    break
     else:
         tkinter.messagebox.showinfo("Error", "No Directory selected!")
     return True
@@ -99,4 +105,3 @@ window.mainloop()
 # duplicateProgress = StringVar()
 # duplicateLabel = Label(window, textvariable = duplicateProgress)
 # duplicateLabel.pack()
-
